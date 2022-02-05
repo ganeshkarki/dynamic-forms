@@ -103,3 +103,16 @@ Steps:
 Consideration for Stats data in Form Table: 
 - Opened & Submitted can be stored as json under single column to give more flexibility and later on.
 - Stats data can also be maintained in file base storage in json format. This can be used while caching the data for faster performance. If more stats need to maintained ideally a Queueing the request and batch processing can also be considered.
+
+
+#Deployment
+Clone this Repo
+Change the directory
+sail up -d
+sail php artisan migrate
+
+php artisan breeze:install
+
+npm install
+npm run dev
+php artisan migrate
