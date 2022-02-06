@@ -21936,19 +21936,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     // TODO: Check this needed?
     return {
-      name: "Untitled Form",
-      selection: {
-        input_type: "text",
-        required: "false"
-      },
-      min: "",
-      max: "",
-      //
-      applicants: [{
-        previous: '',
-        expiration: ''
-      }],
-      //
       form: {
         name: "Untitled Form",
         count: 0,
@@ -21965,15 +21952,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    addVisa: function addVisa() {
-      this.applicants.push({
-        previous: '',
-        expiration: ''
-      });
-    },
-    deleteVisa: function deleteVisa(counter) {
-      this.applicants.splice(counter, 1);
-    },
     addField: function addField() {
       this.form.fields.push({
         label: "Enter label",
@@ -23541,6 +23519,9 @@ var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_24 = ["onUpdate:modelValue"];
+var _hoisted_25 = {
+  "class": "debug"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -23634,7 +23615,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, "Add Field")], 32
       /* HYDRATE_EVENTS */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <div class=\"debug\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <pre><code>{{ $data }}</code></pre>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        </div>")])])])];
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("code", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$data), 1
+      /* TEXT */
+      )])])])])])];
     }),
     _: 1
     /* STABLE */

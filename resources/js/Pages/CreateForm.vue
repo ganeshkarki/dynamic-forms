@@ -61,9 +61,9 @@
 
                         </form>
 
-<!--                        <div class="debug">-->
-<!--                            <pre><code>{{ $data }}</code></pre>-->
-<!--                        </div>-->
+                        <div class="debug">
+                            <pre><code>{{ $data }}</code></pre>
+                        </div>
 
                 </div>
             </div>
@@ -87,24 +87,6 @@ export default {
         // TODO: Check this needed?
 
         return {
-            name: "Untitled Form",
-            selection: {
-                input_type: "text",
-                required: "false",
-            },
-            min: "",
-            max:"",
-            //
-
-            applicants:[
-                {
-                    previous: '',
-                    expiration:''
-                }
-            ],
-
-
-            //
             form: {
                 name: "Untitled Form",
                 count: 0,
@@ -122,15 +104,6 @@ export default {
         }
     },
     methods : {
-        addVisa(){
-            this.applicants.push({
-                previous:'',
-                expiration: ''
-            })
-        },
-        deleteVisa(counter){
-            this.applicants.splice(counter,1);
-        },
         addField(){
             this.form.fields.push({
                 label: "Enter label",
@@ -143,7 +116,6 @@ export default {
         deleteField(counter){
             this.form.fields.splice(counter,1);
         }
-
     }
 }
 </script>
