@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +16,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
     //Route::get('/forms', [RegisteredUserController::class, 'create'])->name('register');
@@ -31,7 +38,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/form/submit', [\App\Http\Controllers\FormCreateController::class, 'submit'])->name('form-submit');
 
     Route::get('/form/list', [\App\Http\Controllers\FormListController::class, 'show'])->name('form-list');
-    Route::get('/form/list/{id}', [\App\Http\Controllers\FormListController::class, 'showById'])->name('form-by-id');
+
+    Route::get('/form/{id}', [\App\Http\Controllers\FormListController::class, 'showById'])->name('form-by-id');
+    Route::post('/form/{id}', [\App\Http\Controllers\FormListController::class, 'showById'])->name('form-by-id');
+
+    //Testing
+
+    Route::get('/form', [\App\Http\Controllers\FormListController::class, 'sampleForm'])->name('sampleform');
+
 
 });
 
