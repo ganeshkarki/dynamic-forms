@@ -63,8 +63,10 @@ Steps:
 - Form can be in state of draft, published, inactive/unpublished
 - Delete the Form (draft, published / unpublished)
 - *Session lifetime and re-login prompt
+- Json data stored as String right now, string length 255 only; check if the mysql json datatype can be used.
+- *Server side form validation
 
-    *\* : Can be considered in Scope*
+    *\* : In Progress / Under consideration*
 
 ## Implementation Approach:
 1. Pages Required:
@@ -85,25 +87,35 @@ Steps:
         
  ## DB Consideration:
  Table: 
- 1. User
+ 1. Users
     - id
-    - (check Laravel default params)
+    - (check Laravel default params) TODO: update docs
     ... 
- 2. Form:
+ 2. Forms:
    - id,
    - name/title
-   - content (holds json value)
-   - Opened
-   - Submitted
+   - specification (holds json value)
+   - open_count
+   - submitted_count
    - Update time
    - Created at
+   - CreatedBy (Foreign key to User)
    - Status: 0: Draft; 1: published; 2: Unpublished (Future Scope)
-   - isDeleted (Future Scope)
+   - isDeleted/active (Future Scope)
+
+3. FormResponses:
+   - id
+   - form_id (Foreign key to form table)
+   - user_id (Foreign Key to user table)
+   - Response (string:  json format)
+   - Created at
+   - Updated by
    
 Consideration for Stats data in Form Table: 
 - Opened & Submitted can be stored as json under single column to give more flexibility and later on.
 - Stats data can also be maintained in file base storage in json format. This can be used while caching the data for faster performance. If more stats need to maintained ideally a Queueing the request and batch processing can also be considered.
 - User: Can separate Admin and User table; 
+
 
 ### Sample Form Data structure to be stored as JSON
 ```php
