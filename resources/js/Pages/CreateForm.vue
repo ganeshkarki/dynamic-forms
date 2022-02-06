@@ -12,59 +12,64 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <form class="vue-form" @submit.prevent="submit">
-                            <fieldset v-for="(field, counter) in form.fields"
-                                      v-bind:key="counter">
-                                <span v-if="counter != 0" @click="deleteField(counter)">Delete</span>
-                                <div>
-                                    <label class="label" for="name">Label</label>
-                                    <input type="text" name="name" id="name" required="" v-model="field.label">
-                                </div>
-                                <div>
-                                    <h4>Field Type</h4>
-                                    <p class="select">
-                                        <select class="budget" v-model="field.input_type">
-                                            <option value="text">Text</option>
-                                            <option value="number">Numeric</option>
-                                            <option value="email">Email</option>
-                                        </select>
-                                    </p>
-                                </div>
 
-                                <div>
-                                    <h4>Validations</h4>
-                                    <ul class="vue-form-list">
-                                        <li>
-                                            <input type="radio" name="radio-1" id="radio-1" value="required"
-                                                   v-model="field.required">
-                                            <label for="radio-1">Required</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="radio-2" id="radio-2" value="not required"
-                                                   v-model="field.required">
-                                            <label for="radio-2">Optional</label>
-                                        </li>
-                                    </ul>
-                                </div>
-
+                        <form  @submit.prevent="submit">
+                            <div class="vue-form" v-for="(field, counter) in form.fields"
+                                 v-bind:key="counter">
+                                <fieldset >
+                                    <span class="text-red-600" v-if="counter != 0" @click="deleteField(counter)">xxxx Delete Below Field xxxx</span>
+                                    <hr>
                                     <div>
-                                        <label class="label" for="min">Min</label>
-                                        <input type="number" name="min" id="min" required="" v-model="field.min">
+                                        <label class="label" for="name">Label</label>
+                                        <input type="text" name="name" id="name" required="" v-model="field.label">
                                     </div>
                                     <div>
-                                        <label class="label" for="max">Max</label>
-                                        <input type="number" name="max" id="max" required="" v-model="field.max">
+                                        <h4>Field Type</h4>
+                                        <p class="select">
+                                            <select class="budget" v-model="field.input_type">
+                                                <option value="text">Text</option>
+                                                <option value="number">Numeric</option>
+                                                <option value="email">Email</option>
+                                            </select>
+                                        </p>
                                     </div>
 
-                            </fieldset>
-                            <button @click="addField">Add Field</button>
+                                    <div>
+                                        <h4>Validations</h4>
+                                        <ul class="vue-form-list">
+                                            <li>
+                                                <input type="radio" name="radio-1" id="radio-1" value="true"
+                                                       v-model="field.required">
+                                                <label for="radio-1">Required</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" name="radio-2" id="radio-2" value="false"
+                                                       v-model="field.required">
+                                                <label for="radio-2">Optional</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                        <div>
+                                            <label class="label" for="min">Min</label>
+                                            <input type="number" name="min" id="min" required="" v-model="field.min">
+                                        </div>
+                                        <div>
+                                            <label class="label" for="max">Max</label>
+                                            <input type="number" name="max" id="max" required="" v-model="field.max">
+                                        </div>
+                                    <button class="text-green-600" @click="addField">+++++ Add Field +++++</button>
+                                </fieldset>
+                            </div>
+                            <div class="vue-form">
+                                <input type="hidden" :value="data">
+                                <input type="submit" value="Submit">
+                            </div>
 
                         </form>
-
-                        <div class="debug">
-                            <pre><code>{{ $data }}</code></pre>
-                        </div>
-
+                    <div class="debug">
+                        <pre><code>{{ $data }}</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,9 +79,13 @@
 <script>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { Head } from '@inertiajs/inertia-vue3';
+import Button from "../Components/Button";
+import Input from "../Components/Input";
 
 export default {
     components: {
+        Input,
+        Button,
         BreezeAuthenticatedLayout,
         Head,
     },
@@ -101,6 +110,7 @@ export default {
                     }
                 ],
             },
+
         }
     },
     methods : {
