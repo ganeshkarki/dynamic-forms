@@ -18,15 +18,46 @@ class FormListController extends Controller {
             $data[$key] = [
                 'id' => $value->id,
                 'name' => $value->name,
-                'url' => route('form-by-id', ['id'=>$value->id])
+                'url' => route('form-stats', ['id'=>$value->id])
             ];
         }
 
         return Inertia::render('FormList', ['data' => $data]);
     }
 
-    public function showById() {
+    public function showById(Request $request) {
+        $id = $request->route()->parameters()['id'];
+        $url = route('form-by-id', ['id' => $id]);
+        $result = DB::table('forms')
+            ->select(['specification'])
+            ->where('id', $id)->first();
 
+        return Inertia::render('Form', ['formData' => $result->specification, 'postUrl'=>$url]);
+
+    }
+    public function getShowById(Request $request) {
+        $id = $request->route()->parameters()['id'];
+        //dd($id);
+        DB::table('forms')->where('id', $id)->increment('open_count');
+        return $this->showById($request);
+    }
+
+    public function stats() {
+        // Get all forms created by user and show in list
+        $stats = DB::table('forms')
+            ->select(['id', 'name', 'open_count', 'submit_count'])
+            ->where('created_by', Auth::id())->get()->toArray();
+
+        $data = [];
+        foreach($stats as $key => $value) {
+            $data[$key] = [
+                'id' => $value->id,
+                'name' => $value->name,
+                'url' => route('form-stats', ['id'=>$value->id])
+            ];
+        }
+
+        return Inertia::render('FormList', ['data' => $data]);
     }
 
     public function sampleForm() {

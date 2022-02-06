@@ -39,9 +39,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/form/submit', [\App\Http\Controllers\FormCreateController::class, 'submit'])->name('form-submit');
 
     Route::get('/form/list', [\App\Http\Controllers\FormListController::class, 'show'])->name('form-list');
+    Route::get('/form/{id}/stats', [\App\Http\Controllers\FormListController::class, 'stats'])->name('form-stats');
 
-    Route::get('/form/{id}', [\App\Http\Controllers\FormListController::class, 'showById'])->name('form-by-id');
+    // Todo: Randomized the ID in url to avoid predictability of URLs for other people's form
+    Route::get('/form/{id}', [\App\Http\Controllers\FormListController::class, 'getShowById'])->name('form-by-id');
     Route::post('/form/{id}', [\App\Http\Controllers\FormListController::class, 'showById'])->name('form-by-id');
+
 
     //Testing
 
