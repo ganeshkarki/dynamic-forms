@@ -140,7 +140,7 @@ $data = [
 ];
 ```
 
-#Deployment
+# Deployment Procedure
 1. Clone this Repo
 2. Change to the directory
 ```
@@ -156,9 +156,9 @@ sail npm run dev
 1. User can Login/Signup: Done
 2. Only Admin can create form : Pending (Authorization part no done to differentiate User vs Admin)
 3. Admin Can see created Form in List: Done
-4. Admin Can see stats: Not Done [Page Creation in Pending. Open count is incremented| Can Dump and See on url:http://localhost/form/1 And Reload to check incrementation]
+4. Admin Can see stats: Not Done [Page Creation in Pending. Open count is incremented| Can Dump and See on url:]http://localhost/form/1 And Reload to check incrementation]
 4. Admin Can design form/ Create: Partial got to Url: http://localhost/form/create [Submit is Pending|Faced UI issues| Shows the Data]
-5. Form can be generated as per specification created by Admin: Done [Sample Route with Proof of Concept: http://localhost/form]
+5. Form can be generated as per specification created by Admin: Done [Sample Route with Proof of Concept: ]http://localhost/form
 Rest of Route: check `web.php` route file
 6. Show List of Responses: Not Done [Ran out of time| Stats page would have shown it]
 
