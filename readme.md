@@ -103,7 +103,30 @@ Steps:
 Consideration for Stats data in Form Table: 
 - Opened & Submitted can be stored as json under single column to give more flexibility and later on.
 - Stats data can also be maintained in file base storage in json format. This can be used while caching the data for faster performance. If more stats need to maintained ideally a Queueing the request and batch processing can also be considered.
+- User: Can separate Admin and User table; 
 
+### Sample Form Data structure to be stored as JSON
+```php
+$data = [
+    "name" => "string|not null",
+    "count" => "int|>1",
+    "version" => "string", // in case this format keeps updating with new values
+    "fields" => [
+        0 => [
+            "label" => "",
+            "input_type" => "text|number|email", //Out of Scope: radio|checkbox|submit|select|textarea||range|range, date, datetime-local, month, time and week", 
+            "required" => "boolean",
+            "min" => "int",
+            "max" => "int",
+            //"disabled" => "boolean", //Out of Scope
+            //"placeholder" => "string", // Out of scope
+        ],
+        1 => [
+                
+        ],
+    ]
+];
+```
 
 #Deployment
 Clone this Repo
