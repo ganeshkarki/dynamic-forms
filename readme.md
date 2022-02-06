@@ -108,6 +108,7 @@ Consideration for Stats data in Form Table:
 #Deployment
 Clone this Repo
 Change the directory
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 sail up -d
 sail php artisan migrate
 
@@ -115,4 +116,4 @@ php artisan breeze:install
 
 npm install
 npm run dev
-php artisan migrate
+php artisan migrate:fresh --seed
