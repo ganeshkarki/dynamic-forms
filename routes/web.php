@@ -28,6 +28,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// TODO: Need to separate user and admin access
 Route::middleware(['auth'])->group(function () {
     //Route::get('/forms', [RegisteredUserController::class, 'create'])->name('register');
     // Admin Routes

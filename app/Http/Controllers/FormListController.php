@@ -2,11 +2,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class FormListController extends Controller {
     public function show() {
+        // Get all forms created by user and show in list
+        $forms = DB::table('forms')
+            ->select(['id', 'name'])
+            ->where('created_by', Auth::id())->get()->toArray();
 
+        $data = [];
+        foreach($forms as $key => $value) {
+            $data[$key] = [
+                'id' => $value->id,
+                'name' => $value->name,
+                'url' => route('form-by-id', ['id'=>$value->id])
+            ];
+        }
+
+        return Inertia::render('FormList', ['data' => $data]);
     }
 
     public function showById() {

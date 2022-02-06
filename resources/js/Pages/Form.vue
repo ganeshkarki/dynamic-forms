@@ -78,19 +78,6 @@
             formData: Array,
             postUrl: String,
         },
-        data() {
-            return {
-                form: this.$inertia.form({
-                    formName: "Tell Us About Yourself",
-                    userName: "",
-                    favoriteColor: "Red",
-                    favoriteHamburger: "",
-                    favoriteHangout: [],
-                    workHours: 0
-                }),
-                showSubmitFeedback: false,
-            }
-        },
 
         methods: {
         }
