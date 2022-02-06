@@ -152,7 +152,7 @@ sail npm run dev
 ```
 
 
-# Complete
+# Feature Completion Status
 1. User can Login/Signup: Done
 2. Only Admin can create form : Pending (Authorization part no done to differentiate User vs Admin)
 3. Admin Can see created Form in List: Done
@@ -163,4 +163,4 @@ Rest of Route: check `web.php` route file
 6. Show List of Responses: Not Done [Ran out of time| Stats page would have shown it]
 
 
-# Sorry Unable to complete all logic
+## Sorry Unable to complete all logic
