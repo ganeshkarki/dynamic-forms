@@ -8,9 +8,9 @@
             </h2>
         </template>
         <!--   TODO: Fix Layout     -->
-        <Link :href="route('form-create')" class="underline">
-            Create Form
-        </Link>
+        <form :action="route('form-create')">
+            <Button>Create Form</Button>
+        </form>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -25,13 +25,14 @@
 
 <script>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
-import {Head, Link} from '@inertiajs/inertia-vue3';
+import {Head} from '@inertiajs/inertia-vue3';
+import Button from "../Components/Button";
 
 export default {
     components: {
+        Button,
         BreezeAuthenticatedLayout,
         Head,
-        Link,
     },
     props: {
         data: Array

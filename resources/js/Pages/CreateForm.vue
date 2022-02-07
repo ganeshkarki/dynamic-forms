@@ -12,19 +12,26 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-
-                        <form  @submit.prevent="submit">
+                        <div class="vue-form">
+                            <fieldset>
+                                <div>
+                                    <label class="label" for="formname">Form Name</label>
+                                    <input type="text" name="formname" id="formname" required="" v-model="form.name">
+                                </div>
+                            </fieldset>
+                        </div>
+                        <form>
                             <div class="vue-form" v-for="(field, counter) in form.fields"
                                  v-bind:key="counter">
                                 <fieldset >
-                                    <span class="text-red-600" v-if="counter != 0" @click="deleteField(counter)">xxxx Delete Below Field xxxx</span>
+                                    <label class="label">Field {{counter+1}}</label>
                                     <hr>
                                     <div>
                                         <label class="label" for="name">Label</label>
-                                        <input type="text" name="name" id="name" required="" v-model="field.label">
+                                        <input type="text" name="name" id="name" required v-model="field.label" placeholder="Enter form field">
                                     </div>
                                     <div>
-                                        <h4>Field Type</h4>
+                                        <h4>Type</h4>
                                         <p class="select">
                                             <select class="budget" v-model="field.input_type">
                                                 <option value="text">Text</option>
@@ -50,20 +57,21 @@
                                         </ul>
                                     </div>
 
-                                        <div>
-                                            <label class="label" for="min">Min</label>
-                                            <input type="number" name="min" id="min" required="" v-model="field.min">
-                                        </div>
-                                        <div>
-                                            <label class="label" for="max">Max</label>
-                                            <input type="number" name="max" id="max" required="" v-model="field.max">
-                                        </div>
-                                    <button class="text-green-600" @click="addField">+++++ Add Field +++++</button>
+                                    <div v-if="field.input_type === 'number'">
+                                        <label class="label" for="min">Min</label>
+                                        <input type="number" name="min" id="min" required="" v-model="field.min">
+                                    </div>
+                                    <div v-if="field.input_type === 'number'">
+                                        <label class="label" for="max">Max</label>
+                                        <input type="number" name="max" id="max" required="" v-model="field.max">
+                                    </div>
+                                    <Button type="button" @click="addField">Add Field</Button>
+                                    <Button type="button" v-if="counter != 0" @click="deleteField(counter)">Delete Field</Button>
                                 </fieldset>
                             </div>
-                            <div class="vue-form">
+                            <div class="vue-form items-center">
                                 <input type="hidden" :value="data">
-                                <input type="submit" value="Submit">
+                                <Button>Preview</Button>
                             </div>
 
                         </form>
@@ -78,7 +86,7 @@
 
 <script>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
-import { Head } from '@inertiajs/inertia-vue3';
+import {Head} from '@inertiajs/inertia-vue3';
 import Button from "../Components/Button";
 import Input from "../Components/Input";
 
@@ -88,6 +96,7 @@ export default {
         Button,
         BreezeAuthenticatedLayout,
         Head,
+
     },
     props: {
         data: Array
@@ -102,7 +111,7 @@ export default {
                 version: null,
                 fields:[
                     {
-                        label: "Enter label",
+                        label: "",
                         input_type: "text", // text|number|email
                         required: true,
                         min: null,
