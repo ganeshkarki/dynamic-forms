@@ -24,9 +24,6 @@ Route::get('/', function () {
     ]);
 });
 
-//Route::get('/dashboard', function () {
-//    return Inertia::render('Dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
 
 // TODO: Need to separate user and admin access
 Route::middleware(['auth'])->group(function () {
@@ -39,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/form/submit', [\App\Http\Controllers\FormCreateController::class, 'submit'])->name('form-submit');
 
     Route::get('/form/list', [\App\Http\Controllers\FormListController::class, 'show'])->name('form-list');
+    Route::get('/dashboard', [\App\Http\Controllers\FormListController::class, 'show']);//TODO: Remove this work around
     Route::get('/form/list', [\App\Http\Controllers\FormListController::class, 'show'])->name('dashboard');//TODO: Remove this work around
     Route::get('/form/{id}/stats', [\App\Http\Controllers\FormListController::class, 'stats'])->name('form-stats');
 
