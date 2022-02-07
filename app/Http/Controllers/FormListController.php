@@ -30,6 +30,12 @@ class FormListController extends Controller {
 
     // TODO: Refactor
     /**
+     * Todo: Logic:
+     *  if get -> incrementOpenCOunt & show form to be filled
+     *  else post -> validate and update DB  -> return success.
+     *
+     */
+    /**
      * @param Request $request
      * @return \Inertia\Response
      */
