@@ -15,7 +15,10 @@ class FormCreateController extends Controller {
     public function create() {
     }
 
-    public function preview() {
+    public function preview(Request $request) {
+        $post = $request->post();
+
+        return Inertia::render('Form', ['formData' => $post['specification']]);
     }
 
     public function submit() {

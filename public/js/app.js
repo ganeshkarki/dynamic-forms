@@ -21941,27 +21941,48 @@ __webpack_require__.r(__webpack_exports__);
     data: Array
   },
   data: function data() {
-    // TODO: Check this needed?
     return {
-      form: {
-        name: "Untitled Form",
-        count: 1,
-        version: null,
-        fields: [{
-          label: "",
-          input_type: "text",
-          // text|number|email
-          required: true,
-          min: null,
-          max: null
-        }]
-      }
+      form: this.$inertia.form({
+        specification: {
+          name: "",
+          count: 1,
+          version: null,
+          fields: [{
+            label: "",
+            input_type: "text",
+            // text|number|email
+            required: true,
+            min: null,
+            max: null
+          }]
+        }
+      })
     };
   },
   methods: {
+    name: function name(counter) {
+      var val = counter + 1;
+      return 'name' + val;
+    },
+    type: function type(counter) {
+      var val = counter + 1;
+      return 'type' + val;
+    },
+    required: function required(counter) {
+      var val = counter + 1;
+      return 'required' + val;
+    },
+    number_min: function number_min(counter) {
+      var val = counter + 1;
+      return 'number_min' + val;
+    },
+    number_max: function number_max(counter) {
+      var val = counter + 1;
+      return 'number_max' + val;
+    },
     addField: function addField() {
-      this.form.fields.push({
-        label: "Enter label",
+      this.form.specification.fields.push({
+        label: "",
         input_type: "text",
         // text|number|email
         required: true,
@@ -21971,11 +21992,14 @@ __webpack_require__.r(__webpack_exports__);
       this.updateCount();
     },
     deleteField: function deleteField(counter) {
-      this.form.fields.splice(counter, 1);
+      this.form.specification.fields.splice(counter, 1);
       this.updateCount();
     },
     updateCount: function updateCount() {
-      this.form.count = this.form.fields.length;
+      this.form.specification.count = this.form.specification.fields.length;
+    },
+    submit: function submit() {
+      this.form.post(this.route('form-preview'));
     }
   }
 });
@@ -23481,7 +23505,7 @@ var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_10 = ["onUpdate:modelValue"];
+var _hoisted_10 = ["name", "onUpdate:modelValue"];
 
 var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, "Type", -1
@@ -23492,7 +23516,7 @@ var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_12 = {
   "class": "select"
 };
-var _hoisted_13 = ["onUpdate:modelValue"];
+var _hoisted_13 = ["name", "onUpdate:modelValue"];
 
 var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
@@ -23529,7 +23553,7 @@ var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_19 = {
   "class": "vue-form-list"
 };
-var _hoisted_20 = ["onUpdate:modelValue"];
+var _hoisted_20 = ["name", "onUpdate:modelValue"];
 
 var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
@@ -23539,7 +23563,7 @@ var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_22 = ["onUpdate:modelValue"];
+var _hoisted_22 = ["name", "onUpdate:modelValue"];
 
 var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
@@ -23562,7 +23586,7 @@ var _hoisted_25 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_26 = ["onUpdate:modelValue"];
+var _hoisted_26 = ["name", "onUpdate:modelValue"];
 var _hoisted_27 = {
   key: 1
 };
@@ -23576,7 +23600,7 @@ var _hoisted_28 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_29 = ["onUpdate:modelValue"];
+var _hoisted_29 = ["name", "onUpdate:modelValue"];
 
 var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
@@ -23592,7 +23616,7 @@ var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
 
 var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Add Field");
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Delete Field");
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Delete Field ");
 
 var _hoisted_34 = {
   "class": "vue-form items-center"
@@ -23618,17 +23642,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_1];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+        onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+          return $options.submit && $options.submit.apply($options, arguments);
+        }, ["prevent"])),
+        method: "post"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         name: "formname",
         id: "formname",
         required: "",
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-          return $data.form.name = $event;
-        })
+          return $data.form.specification.name = $event;
+        }),
+        placeholder: "Survey, Application, etc."
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.name]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.form.fields, function (field, counter) {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.specification.name]])])])]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.form.specification.fields, function (field, counter) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "vue-form",
           key: counter
@@ -23636,7 +23666,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* TEXT */
         ), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
           type: "text",
-          name: "name",
+          name: $options.name(counter),
           id: "name",
           required: "",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
@@ -23646,6 +23676,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, null, 8
         /* PROPS */
         , _hoisted_10), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.label]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+          name: $options.type(counter),
           "class": "budget",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
             return field.input_type = $event;
@@ -23654,7 +23685,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* PROPS */
         , _hoisted_13), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, field.input_type]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
           type: "radio",
-          name: "radio-1",
+          name: $options.required(counter),
           id: "radio-1",
           value: "true",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
@@ -23664,7 +23695,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* PROPS */
         , _hoisted_20), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, field.required]]), _hoisted_21]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
           type: "radio",
-          name: "radio-2",
+          name: $options.required(counter),
           id: "radio-2",
           value: "false",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
@@ -23674,7 +23705,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* PROPS */
         , _hoisted_22), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, field.required]]), _hoisted_23])])]), field.input_type === 'number' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
           type: "number",
-          name: "min",
+          name: $options.number_min(counter),
           id: "min",
           required: "",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
@@ -23684,7 +23715,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* PROPS */
         , _hoisted_26), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.min]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.input_type === 'number' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
           type: "number",
-          name: "max",
+          name: $options.number_max(counter),
           id: "max",
           required: "",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
@@ -23736,7 +23767,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("code", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$data), 1
+      })])], 32
+      /* HYDRATE_EVENTS */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("code", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$data['form']['specification']), 1
       /* TEXT */
       )])])])])])];
     }),
@@ -24306,7 +24339,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-f1c74b6e],\n    *[data-v-f1c74b6e]::after,\n    *[data-v-f1c74b6e]::before {\n        box-sizing: border-box;\n}\nbody[data-v-f1c74b6e] {\n        color: #fff;\n        background: #949c4e;\n        background: linear-gradient(\n            115deg,\n            rgba(86, 216, 228, 1) 10%,\n            rgba(159, 1, 234, 1) 90%\n        );\n        font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto,\n        Oxygen-Sans, Ubuntu, Cantarell, \"Helvetica Neue\", Helvetica, Arial,\n        sans-serif;\n        -webkit-font-smoothing: antialiased;\n        -moz-osx-font-smoothing: grayscale;\n}\nhtml[data-v-f1c74b6e],\n    body[data-v-f1c74b6e],\n    .container[data-v-f1c74b6e] {\n        min-height: 100vh;\n}\n.center[data-v-f1c74b6e] {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n}\na[data-v-f1c74b6e] {\n        color: #2c3e50;\n        text-decoration: none;\n}\nheader[data-v-f1c74b6e] {\n        position: relative;\n        height: 150px;\n        padding-top: 100px;\n}\nheader h1[data-v-f1c74b6e] {\n        text-align: center;\n        font-size: 2.4rem;\n        font-weight: 300;\n}\n#app[data-v-f1c74b6e] {\n        display: flex;\n}\n.vue-form[data-v-f1c74b6e] {\n        font-size: 16px;\n        width: 500px;\n        padding: 15px 30px;\n        border-radius: 4px;\n        margin: 10px auto;\n        background-color: #fff;\n        box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3);\n}\n.vue-form fieldset[data-v-f1c74b6e] {\n        margin: 24px 0 0 0;\n}\n.vue-form legend[data-v-f1c74b6e] {\n        padding-bottom: 10px;\n        border-bottom: 1px solid #ecf0f1;\n}\n.vue-form div[data-v-f1c74b6e] {\n        position: relative;\n        margin: 20px 0;\n}\n.vue-form h4[data-v-f1c74b6e],\n    .vue-form .label[data-v-f1c74b6e] {\n        color: #94aab0;\n        margin-bottom: 10px;\n}\n.vue-form .label[data-v-f1c74b6e] {\n        display: block;\n}\n.vue-form input[data-v-f1c74b6e],\n    .vue-form textarea[data-v-f1c74b6e],\n    .vue-form select[data-v-f1c74b6e],\n    .vue-form label[data-v-f1c74b6e] {\n        color: #2b3e51;\n}\n.vue-form input[type=\"text\"][data-v-f1c74b6e],\n    .vue-form input[type=\"email\"][data-v-f1c74b6e],\n    .vue-form textarea[data-v-f1c74b6e],\n    .vue-form select[data-v-f1c74b6e],\n    .vue-form legend[data-v-f1c74b6e] {\n        display: block;\n        width: 100%;\n        -webkit-appearance: none;\n           -moz-appearance: none;\n                appearance: none;\n}\n.vue-form input[type=\"text\"][data-v-f1c74b6e],\n    .vue-form input[type=\"email\"][data-v-f1c74b6e],\n    .vue-form textarea[data-v-f1c74b6e],\n    .vue-form select[data-v-f1c74b6e] {\n        padding: 12px;\n        border: 1px solid #cfd9db;\n        background-color: #ffffff;\n        border-radius: 0.25em;\n        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);\n}\n.vue-form input[type=\"text\"][data-v-f1c74b6e]:focus,\n    .vue-form input[type=\"email\"][data-v-f1c74b6e]:focus,\n    .vue-form textarea[data-v-f1c74b6e]:focus,\n    .vue-form select[data-v-f1c74b6e]:focus {\n        outline: none;\n        border-color: #2c3e50;\n        box-shadow: 0 0 5px rgba(44, 151, 222, 0.2);\n}\n.vue-form .select[data-v-f1c74b6e] {\n        position: relative;\n}\n.vue-form .select[data-v-f1c74b6e]::after {\n        content: \"\";\n        position: absolute;\n        z-index: 1;\n        right: 16px;\n        top: 50%;\n        margin-top: -8px;\n        display: block;\n        width: 16px;\n        height: 16px;\n        background: url(\"data:image/svg+xml;charset=utf-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0D%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%0D%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0D%0A%09%20width%3D%2216px%22%20height%3D%2216px%22%20viewBox%3D%220%200%2016%2016%22%20enable-background%3D%22new%200%200%2016%2016%22%20xml%3Aspace%3D%22preserve%22%3E%0D%0A%3Cg%3E%0D%0A%09%3Cpolygon%20fill%3D%22%232c3e50%22%20points%3D%220.9%2C5.5%203.1%2C3.4%208%2C8.3%2012.9%2C3.4%2015.1%2C5.5%208%2C12.6%20%09%22%2F%3E%0D%0A%3C%2Fg%3E%0D%0A%3C%2Fsvg%3E\")\n        no-repeat center center;\n        pointer-events: none;\n}\n.vue-form select[data-v-f1c74b6e] {\n        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);\n        cursor: pointer;\n}\n.vue-form select[data-v-f1c74b6e]::-ms-expand {\n        display: none;\n}\n.vue-form .vue-form-list[data-v-f1c74b6e] {\n        margin-top: 16px;\n}\n.vue-form .vue-form-list[data-v-f1c74b6e]::after {\n        clear: both;\n        content: \"\";\n        display: table;\n}\n.vue-form .vue-form-list li[data-v-f1c74b6e] {\n        display: inline-block;\n        position: relative;\n        -webkit-user-select: none;\n           -moz-user-select: none;\n            -ms-user-select: none;\n                user-select: none;\n        margin: 0 26px 16px 0;\n        float: left;\n}\n.vue-form input[type=\"radio\"][data-v-f1c74b6e],\n    .vue-form input[type=\"checkbox\"][data-v-f1c74b6e] {\n        position: absolute;\n        left: 0;\n        top: 50%;\n        transform: translateY(-50%);\n        margin: 0;\n        padding: 0;\n        opacity: 0;\n        z-index: 2;\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e],\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e] {\n        padding-left: 24px;\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::after,\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::after {\n        content: \"\";\n        display: block;\n        position: absolute;\n        left: 0;\n        top: 50%;\n        margin-top: -8px;\n        width: 16px;\n        height: 16px;\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::before {\n        border: 1px solid #cfd9db;\n        background: #ffffff;\n        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::after {\n        border-radius: 50%;\n}\n.vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::after {\n        border-radius: 0.25em;\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::after,\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::after {\n        background-color: #2c3e50;\n        background-position: center center;\n        background-repeat: no-repeat;\n        box-shadow: 0 0 5px rgba(44, 151, 222, 0.4);\n        display: none;\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::after {\n        background-image: url(\"data:image/svg+xml;charset=utf-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0D%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%0D%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0D%0A%09%20width%3D%2216px%22%20height%3D%2216px%22%20viewBox%3D%220%200%2016%2016%22%20enable-background%3D%22new%200%200%2016%2016%22%20xml%3Aspace%3D%22preserve%22%3E%0D%0A%3Ccircle%20fill%3D%22%23FFFFFF%22%20cx%3D%228%22%20cy%3D%228%22%20r%3D%223%22%2F%3E%0D%0A%3C%2Fsvg%3E\");\n}\n.vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::after {\n        background-image: url(\"data:image/svg+xml;charset=utf-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0D%0A%3C%21--%20Generator%3A%20Adobe%20Illustrator%2018.1.1%2C%20SVG%20Export%20Plug-In%20.%20SVG%20Version%3A%206.00%20Build%200%29%20%20--%3E%0D%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%0D%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0D%0A%09%20width%3D%2216px%22%20height%3D%2216px%22%20viewBox%3D%220%200%2016%2016%22%20enable-background%3D%22new%200%200%2016%2016%22%20xml%3Aspace%3D%22preserve%22%3E%0D%0A%3Cpolyline%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22square%22%20stroke-miterlimit%3D%2210%22%20points%3D%225%2C8%207%2C10%2011%2C6%20%22%2F%3E%0D%0A%3C%2Fsvg%3E\");\n}\n.vue-form input[type=\"radio\"]:focus + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"checkbox\"]:focus + label[data-v-f1c74b6e]::before {\n        box-shadow: 0 0 5px rgba(44, 151, 222, 0.6);\n}\n.vue-form input[type=\"radio\"]:checked + label[data-v-f1c74b6e]::after,\n    .vue-form input[type=\"checkbox\"]:checked + label[data-v-f1c74b6e]::after {\n        display: block;\n}\n.vue-form input[type=\"radio\"]:checked + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"radio\"]:checked + label[data-v-f1c74b6e]::after,\n    .vue-form input[type=\"checkbox\"]:checked + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"checkbox\"]:checked + label[data-v-f1c74b6e]::after {\n        -webkit-animation: cd-bounce-f1c74b6e 0.3s;\n                animation: cd-bounce-f1c74b6e 0.3s;\n}\n.vue-form textarea[data-v-f1c74b6e] {\n        min-height: 120px;\n        resize: vertical;\n        overflow: auto;\n}\n.vue-form input[type=\"submit\"][data-v-f1c74b6e] {\n        border: none;\n        background: #2c3e50;\n        border-radius: 0.25em;\n        padding: 12px 20px;\n        color: #ffffff;\n        font-weight: bold;\n        float: right;\n        cursor: pointer;\n        -webkit-font-smoothing: antialiased;\n        -moz-osx-font-smoothing: grayscale;\n        -webkit-appearance: none;\n           -moz-appearance: none;\n                appearance: none;\n}\n.no-touch .vue-form input[type=\"submit\"][data-v-f1c74b6e]:hover {\n        background: #42a2e1;\n}\n.vue-form input[type=\"submit\"][data-v-f1c74b6e]:focus {\n        outline: none;\n        background: #2b3e51;\n}\n.vue-form input[type=\"submit\"][data-v-f1c74b6e]:active {\n        transform: scale(0.9);\n}\n.vue-form .error-message[data-v-f1c74b6e] {\n        height: 35px;\n        margin: 0px;\n}\n.vue-form .error-message p[data-v-f1c74b6e] {\n        background: #e94b35;\n        color: #ffffff;\n        font-size: 1.4rem;\n        text-align: center;\n        -webkit-font-smoothing: antialiased;\n        -moz-osx-font-smoothing: grayscale;\n        border-radius: 0.25em;\n        padding: 16px;\n}\n.vue-form .error[data-v-f1c74b6e] {\n        border-color: #e94b35 !important;\n}\n.vue-form .counter[data-v-f1c74b6e] {\n        color: #2c3e50;\n        position: absolute;\n        right: 0px;\n        top: 0px;\n        font-size: 10px;\n        padding: 4px;\n}\n.debug[data-v-f1c74b6e] {\n        border-radius: 4px;\n        margin: 50px auto;\n        width: 500px;\n        background-color: #000;\n        padding: 50px;\n        background: rgba(0, 0, 0, 0.8);\n        box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3);\n}\n.debug pre[data-v-f1c74b6e] {\n        color: #ffffff;\n        font-size: 18px;\n        line-height: 30px;\n        font-family: \"Source Code Pro\", monospace;\n        font-weight: 300;\n        white-space: pre-wrap;\n}\n@-webkit-keyframes cd-bounce-f1c74b6e {\n0%,\n        100% {\n            -webkit-transform: scale(1);\n}\n50% {\n            -webkit-transform: scale(0.8);\n}\n}\n@keyframes cd-bounce-f1c74b6e {\n0%,\n        100% {\n            transform: scale(1);\n}\n50% {\n            transform: scale(0.8);\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-f1c74b6e],\n    *[data-v-f1c74b6e]::after,\n    *[data-v-f1c74b6e]::before {\n        box-sizing: border-box;\n}\nbody[data-v-f1c74b6e] {\n        color: #fff;\n        background: #949c4e;\n        background: linear-gradient(\n            115deg,\n            rgba(86, 216, 228, 1) 10%,\n            rgba(159, 1, 234, 1) 90%\n        );\n        font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto,\n        Oxygen-Sans, Ubuntu, Cantarell, \"Helvetica Neue\", Helvetica, Arial,\n        sans-serif;\n        -webkit-font-smoothing: antialiased;\n        -moz-osx-font-smoothing: grayscale;\n}\nhtml[data-v-f1c74b6e],\n    body[data-v-f1c74b6e],\n    .container[data-v-f1c74b6e] {\n        min-height: 100vh;\n}\n.center[data-v-f1c74b6e] {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n}\na[data-v-f1c74b6e] {\n        color: #2c3e50;\n        text-decoration: none;\n}\nheader[data-v-f1c74b6e] {\n        position: relative;\n        height: 150px;\n        padding-top: 100px;\n}\nheader h1[data-v-f1c74b6e] {\n        text-align: center;\n        font-size: 2.4rem;\n        font-weight: 300;\n}\n#app[data-v-f1c74b6e] {\n        display: flex;\n}\n.vue-form[data-v-f1c74b6e] {\n        font-size: 16px;\n        width: 500px;\n        padding: 15px 30px;\n        border-radius: 4px;\n        margin: 10px auto;\n        background-color: #fff;\n        box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3);\n}\n.vue-form fieldset[data-v-f1c74b6e] {\n        margin: 24px 0 0 0;\n}\n.vue-form legend[data-v-f1c74b6e] {\n        padding-bottom: 10px;\n        border-bottom: 1px solid #ecf0f1;\n}\n.vue-form div[data-v-f1c74b6e] {\n        position: relative;\n        margin: 20px 0;\n}\n.vue-form h4[data-v-f1c74b6e],\n    .vue-form .label[data-v-f1c74b6e] {\n        color: #94aab0;\n        margin-bottom: 10px;\n}\n.vue-form .label[data-v-f1c74b6e] {\n        display: block;\n}\n.vue-form input[data-v-f1c74b6e],\n    .vue-form textarea[data-v-f1c74b6e],\n    .vue-form select[data-v-f1c74b6e],\n    .vue-form label[data-v-f1c74b6e] {\n        color: #2b3e51;\n}\n.vue-form input[type=\"text\"][data-v-f1c74b6e],\n    .vue-form input[type=\"email\"][data-v-f1c74b6e],\n    .vue-form textarea[data-v-f1c74b6e],\n    .vue-form select[data-v-f1c74b6e],\n    .vue-form legend[data-v-f1c74b6e] {\n        display: block;\n        width: 100%;\n        -webkit-appearance: none;\n           -moz-appearance: none;\n                appearance: none;\n}\n.vue-form input[type=\"text\"][data-v-f1c74b6e],\n    .vue-form input[type=\"email\"][data-v-f1c74b6e],\n    .vue-form textarea[data-v-f1c74b6e],\n    .vue-form select[data-v-f1c74b6e] {\n        padding: 12px;\n        border: 1px solid #cfd9db;\n        background-color: #ffffff;\n        border-radius: 0.25em;\n        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);\n}\n.vue-form input[type=\"text\"][data-v-f1c74b6e]:focus,\n    .vue-form input[type=\"email\"][data-v-f1c74b6e]:focus,\n    .vue-form textarea[data-v-f1c74b6e]:focus,\n    .vue-form select[data-v-f1c74b6e]:focus {\n        outline: none;\n        border-color: #2c3e50;\n        box-shadow: 0 0 5px rgba(44, 151, 222, 0.2);\n}\n.vue-form .select[data-v-f1c74b6e] {\n        position: relative;\n}\n.vue-form .select[data-v-f1c74b6e]::after {\n        content: \"\";\n        position: absolute;\n        z-index: 1;\n        right: 16px;\n        top: 50%;\n        margin-top: -8px;\n        display: block;\n        width: 16px;\n        height: 16px;\n        background: url(\"data:image/svg+xml;charset=utf-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0D%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%0D%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0D%0A%09%20width%3D%2216px%22%20height%3D%2216px%22%20viewBox%3D%220%200%2016%2016%22%20enable-background%3D%22new%200%200%2016%2016%22%20xml%3Aspace%3D%22preserve%22%3E%0D%0A%3Cg%3E%0D%0A%09%3Cpolygon%20fill%3D%22%232c3e50%22%20points%3D%220.9%2C5.5%203.1%2C3.4%208%2C8.3%2012.9%2C3.4%2015.1%2C5.5%208%2C12.6%20%09%22%2F%3E%0D%0A%3C%2Fg%3E%0D%0A%3C%2Fsvg%3E\") no-repeat center center;\n        pointer-events: none;\n}\n.vue-form select[data-v-f1c74b6e] {\n        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);\n        cursor: pointer;\n}\n.vue-form select[data-v-f1c74b6e]::-ms-expand {\n        display: none;\n}\n.vue-form .vue-form-list[data-v-f1c74b6e] {\n        margin-top: 16px;\n}\n.vue-form .vue-form-list[data-v-f1c74b6e]::after {\n        clear: both;\n        content: \"\";\n        display: table;\n}\n.vue-form .vue-form-list li[data-v-f1c74b6e] {\n        display: inline-block;\n        position: relative;\n        -webkit-user-select: none;\n           -moz-user-select: none;\n            -ms-user-select: none;\n                user-select: none;\n        margin: 0 26px 16px 0;\n        float: left;\n}\n.vue-form input[type=\"radio\"][data-v-f1c74b6e],\n    .vue-form input[type=\"checkbox\"][data-v-f1c74b6e] {\n        position: absolute;\n        left: 0;\n        top: 50%;\n        transform: translateY(-50%);\n        margin: 0;\n        padding: 0;\n        opacity: 0;\n        z-index: 2;\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e],\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e] {\n        padding-left: 24px;\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::after,\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::after {\n        content: \"\";\n        display: block;\n        position: absolute;\n        left: 0;\n        top: 50%;\n        margin-top: -8px;\n        width: 16px;\n        height: 16px;\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::before {\n        border: 1px solid #cfd9db;\n        background: #ffffff;\n        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::after {\n        border-radius: 50%;\n}\n.vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::after {\n        border-radius: 0.25em;\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::after,\n    .vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::after {\n        background-color: #2c3e50;\n        background-position: center center;\n        background-repeat: no-repeat;\n        box-shadow: 0 0 5px rgba(44, 151, 222, 0.4);\n        display: none;\n}\n.vue-form input[type=\"radio\"] + label[data-v-f1c74b6e]::after {\n        background-image: url(\"data:image/svg+xml;charset=utf-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0D%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%0D%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0D%0A%09%20width%3D%2216px%22%20height%3D%2216px%22%20viewBox%3D%220%200%2016%2016%22%20enable-background%3D%22new%200%200%2016%2016%22%20xml%3Aspace%3D%22preserve%22%3E%0D%0A%3Ccircle%20fill%3D%22%23FFFFFF%22%20cx%3D%228%22%20cy%3D%228%22%20r%3D%223%22%2F%3E%0D%0A%3C%2Fsvg%3E\");\n}\n.vue-form input[type=\"checkbox\"] + label[data-v-f1c74b6e]::after {\n        background-image: url(\"data:image/svg+xml;charset=utf-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0D%0A%3C%21--%20Generator%3A%20Adobe%20Illustrator%2018.1.1%2C%20SVG%20Export%20Plug-In%20.%20SVG%20Version%3A%206.00%20Build%200%29%20%20--%3E%0D%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%0D%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0D%0A%09%20width%3D%2216px%22%20height%3D%2216px%22%20viewBox%3D%220%200%2016%2016%22%20enable-background%3D%22new%200%200%2016%2016%22%20xml%3Aspace%3D%22preserve%22%3E%0D%0A%3Cpolyline%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22square%22%20stroke-miterlimit%3D%2210%22%20points%3D%225%2C8%207%2C10%2011%2C6%20%22%2F%3E%0D%0A%3C%2Fsvg%3E\");\n}\n.vue-form input[type=\"radio\"]:focus + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"checkbox\"]:focus + label[data-v-f1c74b6e]::before {\n        box-shadow: 0 0 5px rgba(44, 151, 222, 0.6);\n}\n.vue-form input[type=\"radio\"]:checked + label[data-v-f1c74b6e]::after,\n    .vue-form input[type=\"checkbox\"]:checked + label[data-v-f1c74b6e]::after {\n        display: block;\n}\n.vue-form input[type=\"radio\"]:checked + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"radio\"]:checked + label[data-v-f1c74b6e]::after,\n    .vue-form input[type=\"checkbox\"]:checked + label[data-v-f1c74b6e]::before,\n    .vue-form input[type=\"checkbox\"]:checked + label[data-v-f1c74b6e]::after {\n        -webkit-animation: cd-bounce-f1c74b6e 0.3s;\n                animation: cd-bounce-f1c74b6e 0.3s;\n}\n.vue-form textarea[data-v-f1c74b6e] {\n        min-height: 120px;\n        resize: vertical;\n        overflow: auto;\n}\n.vue-form input[type=\"submit\"][data-v-f1c74b6e] {\n        border: none;\n        background: #2c3e50;\n        border-radius: 0.25em;\n        padding: 12px 20px;\n        color: #ffffff;\n        font-weight: bold;\n        float: right;\n        cursor: pointer;\n        -webkit-font-smoothing: antialiased;\n        -moz-osx-font-smoothing: grayscale;\n        -webkit-appearance: none;\n           -moz-appearance: none;\n                appearance: none;\n}\n.no-touch .vue-form input[type=\"submit\"][data-v-f1c74b6e]:hover {\n        background: #42a2e1;\n}\n.vue-form input[type=\"submit\"][data-v-f1c74b6e]:focus {\n        outline: none;\n        background: #2b3e51;\n}\n.vue-form input[type=\"submit\"][data-v-f1c74b6e]:active {\n        transform: scale(0.9);\n}\n.vue-form .error-message[data-v-f1c74b6e] {\n        height: 35px;\n        margin: 0px;\n}\n.vue-form .error-message p[data-v-f1c74b6e] {\n        background: #e94b35;\n        color: #ffffff;\n        font-size: 1.4rem;\n        text-align: center;\n        -webkit-font-smoothing: antialiased;\n        -moz-osx-font-smoothing: grayscale;\n        border-radius: 0.25em;\n        padding: 16px;\n}\n.vue-form .error[data-v-f1c74b6e] {\n        border-color: #e94b35 !important;\n}\n.vue-form .counter[data-v-f1c74b6e] {\n        color: #2c3e50;\n        position: absolute;\n        right: 0px;\n        top: 0px;\n        font-size: 10px;\n        padding: 4px;\n}\n.debug[data-v-f1c74b6e] {\n        border-radius: 4px;\n        margin: 50px auto;\n        width: 500px;\n        background-color: #000;\n        padding: 50px;\n        background: rgba(0, 0, 0, 0.8);\n        box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3);\n}\n.debug pre[data-v-f1c74b6e] {\n        color: #ffffff;\n        font-size: 18px;\n        line-height: 30px;\n        font-family: \"Source Code Pro\", monospace;\n        font-weight: 300;\n        white-space: pre-wrap;\n}\n@-webkit-keyframes cd-bounce-f1c74b6e {\n0%,\n        100% {\n            -webkit-transform: scale(1);\n}\n50% {\n            -webkit-transform: scale(0.8);\n}\n}\n@keyframes cd-bounce-f1c74b6e {\n0%,\n        100% {\n            transform: scale(1);\n}\n50% {\n            transform: scale(0.8);\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
