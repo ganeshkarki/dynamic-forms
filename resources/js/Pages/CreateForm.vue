@@ -6,7 +6,6 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Create Form
             </h2>
-
         </template>
 
         <div class="py-12">
@@ -65,12 +64,14 @@
                                         <label class="label" for="max">Max</label>
                                         <input type="number" name="max" id="max" required="" v-model="field.max">
                                     </div>
+                                    <hr>
+                                    <br>
                                     <Button type="button" @click="addField">Add Field</Button>
-                                    <Button type="button" v-if="counter != 0" @click="deleteField(counter)">Delete Field</Button>
+                                    <Button class="mx-5 bg-red-600" type="button" v-if="counter != 0" @click="deleteField(counter)">Delete Field</Button>
                                 </fieldset>
                             </div>
                             <div class="vue-form items-center">
-                                <input type="hidden" :value="data">
+                                <input type="hidden" name="data" :value="data">
                                 <Button>Preview</Button>
                             </div>
 
@@ -107,7 +108,7 @@ export default {
         return {
             form: {
                 name: "Untitled Form",
-                count: 0,
+                count: 1,
                 version: null,
                 fields:[
                     {
@@ -130,11 +131,17 @@ export default {
                 required: true,
                 min: null,
                 max: null,
-            })
+            });
+            this.updateCount();
         },
         deleteField(counter){
             this.form.fields.splice(counter,1);
+            this.updateCount();
+        },
+        updateCount() {
+            this.form.count = this.form.fields.length;
         }
+
     }
 }
 </script>
