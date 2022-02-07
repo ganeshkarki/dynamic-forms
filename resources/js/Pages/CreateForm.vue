@@ -179,7 +179,7 @@
                 this.form.specification.count = this.form.specification.fields.length;
             },
             submit() {
-                this.form.post(this.route('form-preview'));
+                this.form.post(this.route('form-submit'));
             }
 
         }

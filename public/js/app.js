@@ -22036,7 +22036,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.specification.count = this.form.specification.fields.length;
     },
     submit: function submit() {
-      this.form.post(this.route('form-preview'));
+      this.form.post(this.route('form-submit'));
     }
   }
 });
