@@ -10,7 +10,7 @@ class FormListController extends Controller {
     public function show() {
         // Get all forms created by user and show in list
         $forms = DB::table('forms')
-            ->select(['id', 'name'])
+            ->select(['id', 'name', 'open_count', 'submit_count'])
             ->where('created_by', Auth::id())->get()->toArray();
 
         $data = [];
@@ -18,7 +18,10 @@ class FormListController extends Controller {
             $data[$key] = [
                 'id' => $value->id,
                 'name' => $value->name,
-                'url' => route('form-stats', ['id'=>$value->id])
+                'open_count' => $value->open_count,
+                'submit_count' => $value->submit_count,
+                'stats_url' => route('form-stats', ['id' => $value->id]),
+                'form_url' => route('form-by-id', ['id' => $value->id]),
             ];
         }
 
@@ -63,11 +66,12 @@ class FormListController extends Controller {
             $data[$key] = [
                 'id' => $value->id,
                 'name' => $value->name,
-                'url' => route('form-stats', ['id'=>$value->id])
+                'open_count' => $value->open_count,
+                'submit_count' => $value->submit_count
             ];
         }
 
-        return Inertia::render('FormList', ['data' => $data]);
+        return Inertia::render('FormStats', ['data' => $data]);
     }
 
     public function sampleForm() {
