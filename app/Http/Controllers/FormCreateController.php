@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class FormCreateController extends Controller {
@@ -15,9 +17,16 @@ class FormCreateController extends Controller {
     public function create() {
     }
 
-    public function preview() {
-    }
+    public function submit(Request $request) {
+        // Todo Server Side Validation
+        $post = $request->post();
 
-    public function submit() {
+        DB::table('forms')->insert([
+            'name' => 'SurveyForm',
+            'specification' => json_encode($post['specification']),
+            'created_by' => Auth::id(),
+        ]);
+
+        return redirect()->route('dashboard');
     }
 }
