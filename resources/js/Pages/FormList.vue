@@ -20,7 +20,7 @@
                             {{form['name']}}
                         </a>
                         <a target="_blank" :href="form['form_url']" class="underline text-sm text-gray-600 hover:text-gray-900 p-5">URL</a>
-                        <span class="p-5">{{form['submit_count'] ?? 0}} / {{form['open_count']??0}}</span>
+                        <span class="p-5">Submitted v/s Opened: {{form['submit_count'] ?? 0}} / {{form['open_count']??0}}</span>
                     </div>
                 </div>
             </div>

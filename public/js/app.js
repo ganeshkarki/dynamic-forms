@@ -24179,7 +24179,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "underline text-sm text-gray-600 hover:text-gray-900 p-5"
         }, "URL", 8
         /* PROPS */
-        , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_form$submit_count = form['submit_count']) !== null && _form$submit_count !== void 0 ? _form$submit_count : 0) + " / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_form$open_count = form['open_count']) !== null && _form$open_count !== void 0 ? _form$open_count : 0), 1
+        , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, "Submitted v/s Opened: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_form$submit_count = form['submit_count']) !== null && _form$submit_count !== void 0 ? _form$submit_count : 0) + " / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_form$open_count = form['open_count']) !== null && _form$open_count !== void 0 ? _form$open_count : 0), 1
         /* TEXT */
         )]);
       }), 256
