@@ -23914,7 +23914,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           type: "number",
           name: $options.number_min(counter),
           id: "min",
-          required: "",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
             return field.min = $event;
           }
@@ -23924,7 +23923,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           type: "number",
           name: $options.number_max(counter),
           id: "max",
-          required: "",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
             return field.max = $event;
           }

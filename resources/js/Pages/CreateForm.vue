@@ -65,12 +65,12 @@
 
                                     <div v-if="field.input_type === 'number'">
                                         <label class="label" for="min">Min</label>
-                                        <input type="number" :name="number_min(counter)" id="min" required=""
+                                        <input type="number" :name="number_min(counter)" id="min"
                                                v-model="field.min">
                                     </div>
                                     <div v-if="field.input_type === 'number'">
                                         <label class="label" for="max">Max</label>
-                                        <input type="number" :name="number_max(counter)" id="max" required=""
+                                        <input type="number" :name="number_max(counter)" id="max"
                                                v-model="field.max">
                                     </div>
                                     <hr>

@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $json = "{
-    \"name\": \"Untitled Form\",
+    \"name\": \"Survey Form\",
     \"count\": 0,
     \"version\": null,
     \"fields\": [
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
     ]
   }";
         DB::table('forms')->insert([
-            'name' => 'SurveyForm',
+            'name' => 'Survey Form',
             'specification' => $json, //todo a valid specification
             'created_by' => 1,
         ]);

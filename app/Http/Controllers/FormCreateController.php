@@ -20,9 +20,10 @@ class FormCreateController extends Controller {
     public function submit(Request $request) {
         // Todo Server Side Validation
         $post = $request->post();
+        $formName = $post['specification']['name'];
 
         DB::table('forms')->insert([
-            'name' => 'SurveyForm',
+            'name' => $formName,
             'specification' => json_encode($post['specification']),
             'created_by' => Auth::id(),
         ]);
