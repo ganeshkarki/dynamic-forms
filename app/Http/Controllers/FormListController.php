@@ -10,7 +10,7 @@ class FormListController extends Controller {
     public function show() {
         // Get all forms created by user and show in list
         $forms = DB::table('forms')
-            ->select(['id', 'name'])
+            ->select(['id', 'name', 'open_count', 'submit_count'])
             ->where('created_by', Auth::id())->get()->toArray();
 
         $data = [];
@@ -18,13 +18,27 @@ class FormListController extends Controller {
             $data[$key] = [
                 'id' => $value->id,
                 'name' => $value->name,
-                'url' => route('form-stats', ['id'=>$value->id])
+                'open_count' => $value->open_count,
+                'submit_count' => $value->submit_count,
+                'stats_url' => route('form-stats', ['id' => $value->id]),
+                'form_url' => route('form-by-id', ['id' => $value->id]),
             ];
         }
 
         return Inertia::render('FormList', ['data' => $data]);
     }
 
+    // TODO: Refactor
+    /**
+     * Todo: Logic:
+     *  if get -> incrementOpenCOunt & show form to be filled
+     *  else post -> validate and update DB  -> return success.
+     *
+     */
+    /**
+     * @param Request $request
+     * @return \Inertia\Response
+     */
     public function showById(Request $request) {
         $id = $request->route()->parameters()['id'];
         $url = route('form-by-id', ['id' => $id]);
@@ -32,7 +46,12 @@ class FormListController extends Controller {
             ->select(['specification'])
             ->where('id', $id)->first();
 
-        return Inertia::render('Form', ['formData' => $result->specification, 'postUrl'=>$url]);
+        // Todo: implement error pages
+        if(!isset($result->specification)) {
+            die('Invalid URL or No record found');
+        }
+
+        return Inertia::render('Form', ['formData' => json_decode($result->specification), 'postUrl'=>$url]);
 
     }
     public function getShowById(Request $request) {
@@ -53,11 +72,12 @@ class FormListController extends Controller {
             $data[$key] = [
                 'id' => $value->id,
                 'name' => $value->name,
-                'url' => route('form-stats', ['id'=>$value->id])
+                'open_count' => $value->open_count,
+                'submit_count' => $value->submit_count
             ];
         }
 
-        return Inertia::render('FormList', ['data' => $data]);
+        return Inertia::render('FormStats', ['data' => $data]);
     }
 
     public function sampleForm() {

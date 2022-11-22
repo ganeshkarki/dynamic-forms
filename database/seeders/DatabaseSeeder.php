@@ -32,9 +32,37 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
+        $json = "{
+    \"name\": \"Survey Form\",
+    \"count\": 0,
+    \"version\": null,
+    \"fields\": [
+      {
+        \"label\": \"Name\",
+        \"input_type\": \"text\",
+        \"required\": true,
+        \"min\": null,
+        \"max\": null
+      },
+      {
+        \"label\": \"Last Name\",
+        \"input_type\": \"text\",
+        \"required\": true,
+        \"min\": null,
+        \"max\": null
+      },
+      {
+        \"label\": \"Enter label\",
+        \"input_type\": \"text\",
+        \"required\": true,
+        \"min\": null,
+        \"max\": null
+      }
+    ]
+  }";
         DB::table('forms')->insert([
-            'name' => 'SurveyForm',
-            'specification' => '{}', //todo a valid specification
+            'name' => 'Survey Form',
+            'specification' => $json, //todo a valid specification
             'created_by' => 1,
         ]);
 
